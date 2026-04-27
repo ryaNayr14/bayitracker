@@ -11,6 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminBayiRouteImport } from './routes/admin/bayi'
+import { Route as AdminBayiIdRouteImport } from './routes/admin/bayi.$id'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -22,31 +25,63 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminBayiRoute = AdminBayiRouteImport.update({
+  id: '/admin/bayi',
+  path: '/admin/bayi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminBayiIdRoute = AdminBayiIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AdminBayiRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/admin/bayi': typeof AdminBayiRouteWithChildren
+  '/admin/': typeof AdminIndexRoute
+  '/admin/bayi/$id': typeof AdminBayiIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/admin/bayi': typeof AdminBayiRouteWithChildren
+  '/admin': typeof AdminIndexRoute
+  '/admin/bayi/$id': typeof AdminBayiIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/admin/bayi': typeof AdminBayiRouteWithChildren
+  '/admin/': typeof AdminIndexRoute
+  '/admin/bayi/$id': typeof AdminBayiIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login'
+  fullPaths: '/' | '/login' | '/admin/bayi' | '/admin/' | '/admin/bayi/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login'
-  id: '__root__' | '/' | '/login'
+  to: '/' | '/login' | '/admin/bayi' | '/admin' | '/admin/bayi/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/login'
+    | '/admin/bayi'
+    | '/admin/'
+    | '/admin/bayi/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginRoute: typeof LoginRoute
+  AdminBayiRoute: typeof AdminBayiRouteWithChildren
+  AdminIndexRoute: typeof AdminIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +100,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/bayi': {
+      id: '/admin/bayi'
+      path: '/admin/bayi'
+      fullPath: '/admin/bayi'
+      preLoaderRoute: typeof AdminBayiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/bayi/$id': {
+      id: '/admin/bayi/$id'
+      path: '/$id'
+      fullPath: '/admin/bayi/$id'
+      preLoaderRoute: typeof AdminBayiIdRouteImport
+      parentRoute: typeof AdminBayiRoute
+    }
   }
 }
+
+interface AdminBayiRouteChildren {
+  AdminBayiIdRoute: typeof AdminBayiIdRoute
+}
+
+const AdminBayiRouteChildren: AdminBayiRouteChildren = {
+  AdminBayiIdRoute: AdminBayiIdRoute,
+}
+
+const AdminBayiRouteWithChildren = AdminBayiRoute._addFileChildren(
+  AdminBayiRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginRoute: LoginRoute,
+  AdminBayiRoute: AdminBayiRouteWithChildren,
+  AdminIndexRoute: AdminIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
