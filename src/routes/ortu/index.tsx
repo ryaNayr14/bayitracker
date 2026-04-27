@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Heart, Calendar, MapPin, Phone, Baby } from "lucide-react";
 import { DashboardLayout } from "@/components/DashboardLayout";
-import { GrafikPertumbuhan } from "@/components/GrafikPertumbuhan";
+import { GrafikPertumbuhan, TabelInterpretasiKMS } from "@/components/GrafikPertumbuhan";
 import { PageHeader } from "@/components/StatCard";
 import {
   dummyBayi,
@@ -84,9 +84,24 @@ function OrtuHome() {
         </div>
 
         <div className="rounded-3xl border border-border/60 bg-card p-6 shadow-card lg:col-span-2">
-          <h3 className="mb-3 text-lg font-bold">Grafik Pertumbuhan</h3>
+          <div className="mb-3 flex items-start justify-between gap-2">
+            <div>
+              <h3 className="text-lg font-bold">Grafik KMS (Berat menurut Umur)</h3>
+              <p className="text-xs text-muted-foreground">
+                Standar WHO · Pita hijau = pertumbuhan normal (-2 s/d +2 SD)
+              </p>
+            </div>
+          </div>
           <GrafikPertumbuhan bayi={bayi} />
         </div>
+      </div>
+
+      <div className="mt-5 rounded-3xl border border-border/60 bg-card p-6 shadow-card">
+        <h3 className="mb-1 text-lg font-bold">Interpretasi KMS</h3>
+        <p className="mb-4 text-xs text-muted-foreground">
+          N (Naik) jika kenaikan berat ≥ KBM (Kenaikan Berat Badan Minimal). T (Tidak Naik) jika di bawah KBM.
+        </p>
+        <TabelInterpretasiKMS bayi={bayi} />
       </div>
 
       <div className="mt-5 grid gap-5 lg:grid-cols-2">

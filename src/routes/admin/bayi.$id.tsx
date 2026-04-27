@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useParams } from "@tanstack/react-router";
 import { ArrowLeft, Baby, Users, ClipboardList, Syringe, FileBarChart, UserCog, Calendar, MapPin, Phone, Heart } from "lucide-react";
 import { DashboardLayout } from "@/components/DashboardLayout";
-import { GrafikPertumbuhan } from "@/components/GrafikPertumbuhan";
+import { GrafikPertumbuhan, TabelInterpretasiKMS } from "@/components/GrafikPertumbuhan";
 import {
   dummyBayi,
   dummyImunisasi,
@@ -73,8 +73,17 @@ function BayiDetail() {
         </div>
 
         <div className="rounded-3xl border border-border/60 bg-card p-6 shadow-card lg:col-span-2">
-          <h3 className="mb-3 text-lg font-bold">Grafik Pertumbuhan</h3>
+          <div className="mb-3">
+            <h3 className="text-lg font-bold">Grafik KMS (Berat menurut Umur)</h3>
+            <p className="text-xs text-muted-foreground">
+              Standar WHO · Pita hijau = normal (-2 s/d +2 SD), kuning = waspada, di luar = perlu rujukan
+            </p>
+          </div>
           <GrafikPertumbuhan bayi={bayi} />
+          <div className="mt-4 border-t border-border/60 pt-4">
+            <h4 className="mb-2 text-sm font-bold">Interpretasi N/T per Penimbangan</h4>
+            <TabelInterpretasiKMS bayi={bayi} />
+          </div>
         </div>
       </div>
 
