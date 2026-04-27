@@ -44,6 +44,12 @@ export const Route = createRootRoute({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Posyandu Ceria — Sistem Informasi Pendataan Bayi" },
+      { name: "description", content: "Baby Growth Tracker is a web application for digitalizing and managing infant health data." },
+      { property: "og:description", content: "Baby Growth Tracker is a web application for digitalizing and managing infant health data." },
+      { name: "twitter:description", content: "Baby Growth Tracker is a web application for digitalizing and managing infant health data." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ca85bb03-9440-4f33-a34c-37ef024989a1/id-preview-5c1152d5--5bd488ee-6d4a-42d1-9495-1e0eb0aa1217.lovable.app-1777298622657.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ca85bb03-9440-4f33-a34c-37ef024989a1/id-preview-5c1152d5--5bd488ee-6d4a-42d1-9495-1e0eb0aa1217.lovable.app-1777298622657.png" },
     ],
     links: [
       {
