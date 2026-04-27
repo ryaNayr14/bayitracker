@@ -9,38 +9,204 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as OrtuIndexRouteImport } from './routes/ortu/index'
+import { Route as KaderIndexRouteImport } from './routes/kader/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as KaderPenimbanganRouteImport } from './routes/kader/penimbangan'
+import { Route as KaderImunisasiRouteImport } from './routes/kader/imunisasi'
+import { Route as AdminPenimbanganRouteImport } from './routes/admin/penimbangan'
+import { Route as AdminLaporanRouteImport } from './routes/admin/laporan'
+import { Route as AdminKaderRouteImport } from './routes/admin/kader'
+import { Route as AdminImunisasiRouteImport } from './routes/admin/imunisasi'
+import { Route as AdminBayiRouteImport } from './routes/admin/bayi'
+import { Route as AdminBayiIdRouteImport } from './routes/admin/bayi.$id'
 
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OrtuIndexRoute = OrtuIndexRouteImport.update({
+  id: '/ortu/',
+  path: '/ortu/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KaderIndexRoute = KaderIndexRouteImport.update({
+  id: '/kader/',
+  path: '/kader/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KaderPenimbanganRoute = KaderPenimbanganRouteImport.update({
+  id: '/kader/penimbangan',
+  path: '/kader/penimbangan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KaderImunisasiRoute = KaderImunisasiRouteImport.update({
+  id: '/kader/imunisasi',
+  path: '/kader/imunisasi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminPenimbanganRoute = AdminPenimbanganRouteImport.update({
+  id: '/admin/penimbangan',
+  path: '/admin/penimbangan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLaporanRoute = AdminLaporanRouteImport.update({
+  id: '/admin/laporan',
+  path: '/admin/laporan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminKaderRoute = AdminKaderRouteImport.update({
+  id: '/admin/kader',
+  path: '/admin/kader',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminImunisasiRoute = AdminImunisasiRouteImport.update({
+  id: '/admin/imunisasi',
+  path: '/admin/imunisasi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminBayiRoute = AdminBayiRouteImport.update({
+  id: '/admin/bayi',
+  path: '/admin/bayi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminBayiIdRoute = AdminBayiIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AdminBayiRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/admin/bayi': typeof AdminBayiRouteWithChildren
+  '/admin/imunisasi': typeof AdminImunisasiRoute
+  '/admin/kader': typeof AdminKaderRoute
+  '/admin/laporan': typeof AdminLaporanRoute
+  '/admin/penimbangan': typeof AdminPenimbanganRoute
+  '/kader/imunisasi': typeof KaderImunisasiRoute
+  '/kader/penimbangan': typeof KaderPenimbanganRoute
+  '/admin/': typeof AdminIndexRoute
+  '/kader/': typeof KaderIndexRoute
+  '/ortu/': typeof OrtuIndexRoute
+  '/admin/bayi/$id': typeof AdminBayiIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/admin/bayi': typeof AdminBayiRouteWithChildren
+  '/admin/imunisasi': typeof AdminImunisasiRoute
+  '/admin/kader': typeof AdminKaderRoute
+  '/admin/laporan': typeof AdminLaporanRoute
+  '/admin/penimbangan': typeof AdminPenimbanganRoute
+  '/kader/imunisasi': typeof KaderImunisasiRoute
+  '/kader/penimbangan': typeof KaderPenimbanganRoute
+  '/admin': typeof AdminIndexRoute
+  '/kader': typeof KaderIndexRoute
+  '/ortu': typeof OrtuIndexRoute
+  '/admin/bayi/$id': typeof AdminBayiIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/admin/bayi': typeof AdminBayiRouteWithChildren
+  '/admin/imunisasi': typeof AdminImunisasiRoute
+  '/admin/kader': typeof AdminKaderRoute
+  '/admin/laporan': typeof AdminLaporanRoute
+  '/admin/penimbangan': typeof AdminPenimbanganRoute
+  '/kader/imunisasi': typeof KaderImunisasiRoute
+  '/kader/penimbangan': typeof KaderPenimbanganRoute
+  '/admin/': typeof AdminIndexRoute
+  '/kader/': typeof KaderIndexRoute
+  '/ortu/': typeof OrtuIndexRoute
+  '/admin/bayi/$id': typeof AdminBayiIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/admin/bayi'
+    | '/admin/imunisasi'
+    | '/admin/kader'
+    | '/admin/laporan'
+    | '/admin/penimbangan'
+    | '/kader/imunisasi'
+    | '/kader/penimbangan'
+    | '/admin/'
+    | '/kader/'
+    | '/ortu/'
+    | '/admin/bayi/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/login'
+    | '/admin/bayi'
+    | '/admin/imunisasi'
+    | '/admin/kader'
+    | '/admin/laporan'
+    | '/admin/penimbangan'
+    | '/kader/imunisasi'
+    | '/kader/penimbangan'
+    | '/admin'
+    | '/kader'
+    | '/ortu'
+    | '/admin/bayi/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/login'
+    | '/admin/bayi'
+    | '/admin/imunisasi'
+    | '/admin/kader'
+    | '/admin/laporan'
+    | '/admin/penimbangan'
+    | '/kader/imunisasi'
+    | '/kader/penimbangan'
+    | '/admin/'
+    | '/kader/'
+    | '/ortu/'
+    | '/admin/bayi/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LoginRoute: typeof LoginRoute
+  AdminBayiRoute: typeof AdminBayiRouteWithChildren
+  AdminImunisasiRoute: typeof AdminImunisasiRoute
+  AdminKaderRoute: typeof AdminKaderRoute
+  AdminLaporanRoute: typeof AdminLaporanRoute
+  AdminPenimbanganRoute: typeof AdminPenimbanganRoute
+  KaderImunisasiRoute: typeof KaderImunisasiRoute
+  KaderPenimbanganRoute: typeof KaderPenimbanganRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  KaderIndexRoute: typeof KaderIndexRoute
+  OrtuIndexRoute: typeof OrtuIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +214,111 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ortu/': {
+      id: '/ortu/'
+      path: '/ortu'
+      fullPath: '/ortu/'
+      preLoaderRoute: typeof OrtuIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kader/': {
+      id: '/kader/'
+      path: '/kader'
+      fullPath: '/kader/'
+      preLoaderRoute: typeof KaderIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kader/penimbangan': {
+      id: '/kader/penimbangan'
+      path: '/kader/penimbangan'
+      fullPath: '/kader/penimbangan'
+      preLoaderRoute: typeof KaderPenimbanganRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kader/imunisasi': {
+      id: '/kader/imunisasi'
+      path: '/kader/imunisasi'
+      fullPath: '/kader/imunisasi'
+      preLoaderRoute: typeof KaderImunisasiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/penimbangan': {
+      id: '/admin/penimbangan'
+      path: '/admin/penimbangan'
+      fullPath: '/admin/penimbangan'
+      preLoaderRoute: typeof AdminPenimbanganRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/laporan': {
+      id: '/admin/laporan'
+      path: '/admin/laporan'
+      fullPath: '/admin/laporan'
+      preLoaderRoute: typeof AdminLaporanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/kader': {
+      id: '/admin/kader'
+      path: '/admin/kader'
+      fullPath: '/admin/kader'
+      preLoaderRoute: typeof AdminKaderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/imunisasi': {
+      id: '/admin/imunisasi'
+      path: '/admin/imunisasi'
+      fullPath: '/admin/imunisasi'
+      preLoaderRoute: typeof AdminImunisasiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/bayi': {
+      id: '/admin/bayi'
+      path: '/admin/bayi'
+      fullPath: '/admin/bayi'
+      preLoaderRoute: typeof AdminBayiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/bayi/$id': {
+      id: '/admin/bayi/$id'
+      path: '/$id'
+      fullPath: '/admin/bayi/$id'
+      preLoaderRoute: typeof AdminBayiIdRouteImport
+      parentRoute: typeof AdminBayiRoute
+    }
   }
 }
 
+interface AdminBayiRouteChildren {
+  AdminBayiIdRoute: typeof AdminBayiIdRoute
+}
+
+const AdminBayiRouteChildren: AdminBayiRouteChildren = {
+  AdminBayiIdRoute: AdminBayiIdRoute,
+}
+
+const AdminBayiRouteWithChildren = AdminBayiRoute._addFileChildren(
+  AdminBayiRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LoginRoute: LoginRoute,
+  AdminBayiRoute: AdminBayiRouteWithChildren,
+  AdminImunisasiRoute: AdminImunisasiRoute,
+  AdminKaderRoute: AdminKaderRoute,
+  AdminLaporanRoute: AdminLaporanRoute,
+  AdminPenimbanganRoute: AdminPenimbanganRoute,
+  KaderImunisasiRoute: KaderImunisasiRoute,
+  KaderPenimbanganRoute: KaderPenimbanganRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  KaderIndexRoute: KaderIndexRoute,
+  OrtuIndexRoute: OrtuIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
