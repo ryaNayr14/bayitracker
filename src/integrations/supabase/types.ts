@@ -14,16 +14,209 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bayi: {
+        Row: {
+          alamat: string | null
+          created_at: string
+          id: string
+          jenis_kelamin: string
+          nama: string
+          nama_ortu: string | null
+          ortu_user_id: string | null
+          tanggal_lahir: string
+          telepon_ortu: string | null
+          updated_at: string
+        }
+        Insert: {
+          alamat?: string | null
+          created_at?: string
+          id?: string
+          jenis_kelamin: string
+          nama: string
+          nama_ortu?: string | null
+          ortu_user_id?: string | null
+          tanggal_lahir: string
+          telepon_ortu?: string | null
+          updated_at?: string
+        }
+        Update: {
+          alamat?: string | null
+          created_at?: string
+          id?: string
+          jenis_kelamin?: string
+          nama?: string
+          nama_ortu?: string | null
+          ortu_user_id?: string | null
+          tanggal_lahir?: string
+          telepon_ortu?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      imunisasi: {
+        Row: {
+          bayi_id: string
+          created_at: string
+          dicatat_oleh: string | null
+          id: string
+          jenis: string
+          tanggal: string
+        }
+        Insert: {
+          bayi_id: string
+          created_at?: string
+          dicatat_oleh?: string | null
+          id?: string
+          jenis: string
+          tanggal: string
+        }
+        Update: {
+          bayi_id?: string
+          created_at?: string
+          dicatat_oleh?: string | null
+          id?: string
+          jenis?: string
+          tanggal?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "imunisasi_bayi_id_fkey"
+            columns: ["bayi_id"]
+            isOneToOne: false
+            referencedRelation: "bayi"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      kader: {
+        Row: {
+          aktif: boolean
+          created_at: string
+          id: string
+          nama: string
+          telepon: string | null
+          user_id: string | null
+        }
+        Insert: {
+          aktif?: boolean
+          created_at?: string
+          id?: string
+          nama: string
+          telepon?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          aktif?: boolean
+          created_at?: string
+          id?: string
+          nama?: string
+          telepon?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      penimbangan: {
+        Row: {
+          bayi_id: string
+          berat_kg: number
+          catatan: string | null
+          created_at: string
+          dicatat_oleh: string | null
+          id: string
+          tanggal: string
+          tinggi_cm: number
+        }
+        Insert: {
+          bayi_id: string
+          berat_kg: number
+          catatan?: string | null
+          created_at?: string
+          dicatat_oleh?: string | null
+          id?: string
+          tanggal: string
+          tinggi_cm: number
+        }
+        Update: {
+          bayi_id?: string
+          berat_kg?: number
+          catatan?: string | null
+          created_at?: string
+          dicatat_oleh?: string | null
+          id?: string
+          tanggal?: string
+          tinggi_cm?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "penimbangan_bayi_id_fkey"
+            columns: ["bayi_id"]
+            isOneToOne: false
+            referencedRelation: "bayi"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          id: string
+          nama: string
+          telepon: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id: string
+          nama?: string
+          telepon?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          nama?: string
+          telepon?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_staff: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "kader" | "ortu"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +343,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "kader", "ortu"],
+    },
   },
 } as const
